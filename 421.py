@@ -30,7 +30,8 @@ class Des():
 
 print("Binvenue sur le jeu du 421 \n Pour jouer tapez 1, Pour quitter tapez 2")
 choix = input()
-while choix != 2:
+print (choix)
+if choix == "1":
 	print("Entrez le nombre de joueurs et definissez vous un numero")
 	nombre_joueurs = input()
 	joueurs = Joueur(nombre_joueurs)
@@ -54,15 +55,17 @@ while choix != 2:
 			if resultat == True:
 				print("Le joueur", joueur, "a gagné.\n 1: relancer 2: Quitter" )
 				relancer = input()
-				if relancer == 2:
-					quitt()
+				if relancer == "2":
+					exit()
 
 		
 		print("Pas de gagnant pour ce tour.\n 1: Relancer 2: Quitter")
 		relancer = input()
+		if relancer == "2":
+			exit()
 
-
-quit()	
+else:
+	quit()
 
 
 
