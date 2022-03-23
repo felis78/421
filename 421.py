@@ -27,6 +27,28 @@ class Des():
             
     	return score
 
+def jeu(nombreJoueur):
+	nombreJoueurs = int(nombre_joueurs)
+	relancer = 0
+	while relancer != 2:
+		joueur = 0
+		for i in range(nombreJoueurs):
+			joueur +=1
+			des = Des()
+			resultatJoueur = des.lancer_des()
+			print("Le joueur ", joueur, "a fait ",resultatJoueur)
+			resultat = joueurs.Joueur_gagnant(resultatJoueur)
+			if resultat == True:
+				print("Le joueur", joueur, "a gagné.\n 1: relancer 2: Quitter" )
+				relancer = input()
+				if relancer == "2":
+					exit()
+
+		
+		print("Pas de gagnant pour ce tour.\n 1: Relancer 2: Quitter")
+		relancer = input()
+		if relancer == "2":
+			exit()
 
 print("Binvenue sur le jeu du 421 \n Pour jouer tapez 1, Pour quitter tapez 2")
 choix = input()
@@ -39,30 +61,10 @@ if choix == "1":
 	
 	print("1: lancer les dés 2: Quitter")
 	choix = input()
-	
-	nombre_joueurs = int(nombre_joueurs)
-	print(nombre_joueurs)
-	relancer = 0
-	while relancer != 2:
-		joueur = 0
-		for i in range(nombre_joueurs):
-			joueur +=1
-			des = Des()
-			resultatJoueur = des.lancer_des()
-			print(resultatJoueur)
-			resultat = joueurs.Joueur_gagnant(resultatJoueur)
-			print(resultat)
-			if resultat == True:
-				print("Le joueur", joueur, "a gagné.\n 1: relancer 2: Quitter" )
-				relancer = input()
-				if relancer == "2":
-					exit()
 
-		
-		print("Pas de gagnant pour ce tour.\n 1: Relancer 2: Quitter")
-		relancer = input()
-		if relancer == "2":
-			exit()
+	jeu(nombre_joueurs)
+	
+	
 
 else:
 	quit()
