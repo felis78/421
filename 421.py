@@ -2,7 +2,7 @@ from random import randint
 
 class Joueur():
 	def __init__(self, nombreJoueurs):
-		self.nombreJoueurs = nombreJoueurs
+			self.nombreJoueurs = nombreJoueurs
 
 	def afficherNombreJoueurs(self):
 		print("Vous serez ", self.nombreJoueurs, "joueurs")
@@ -61,8 +61,12 @@ if choix == "1":
 	
 	print("1: lancer les dés 2: Quitter")
 	choix = input()
+	try:
+		jeu(nombre_joueurs)
 
-	jeu(nombre_joueurs)
+	except:
+		print("On avait dit un NOMBRE de joueurs")
+		quit()
 	
 	
 
