@@ -27,53 +27,74 @@ class Des():
             
     	return score
 
-def jeu(nombreJoueur):
-	nombreJoueurs = int(nombre_joueurs)
-	relancer = 0
-	while relancer != 2:
-		joueur = 0
-		for i in range(nombreJoueurs):
-			joueur +=1
-			des = Des()
-			resultatJoueur = des.lancer_des()
-			print("Le joueur ", joueur, "a fait ",resultatJoueur)
-			resultat = joueurs.Joueur_gagnant(resultatJoueur)
-			if resultat == True:
-				print("Le joueur", joueur, "a gagné.\n 1: relancer 2: Quitter" )
-				relancer = input()
-				if relancer == "2":
-					exit()
+class Jeu:
+
+	def __init__(self):	
+		self.nombreDeTours = 0
+		self.test = 0
+		while test == False:
+			try:
+				choix = int(input("Binvenue sur le jeu du 421 \n Pour jouer tapez 1, Pour quitter tapez 2"))
+				test = True
+			except ValueError:
+				print("OOOOPS this is not integrer" )
+				test = False
+
+
+		if choix == "1":
+			print("Entrez le nombre de joueurs et definissez vous un numero")
+			nombre_joueurs = input()
+			joueurs = Joueur(nombre_joueurs)
+			joueurs.afficherNombreJoueurs()
+	
+			try:
+				choix = int(input("1: lancer les dés 2: Quitter "))
+			
+			except ValueError:
+				print("OOOPS, this is not integrer")
+				quit()
+					
+			if choix == 1:
+				self.jeu(nombre_joueurs)
+
+			else:
+				quit()
+
+		else:
+			quit()
+
+	def jeu(self, nombreJoueur):
+		nombre_Joueurs = int(nombreJoueur)
+		relancer = 0
+		while relancer != 2:
+			joueur = 0
+			for i in range(nombre_Joueurs):
+				joueur += 1
+				des = Des()
+				resultat_Joueur = des.lancer_des()
+				print("Le joueur ", joueur, "a fait ",resultat_Joueur)
+				joueurs = Joueur
+				resultat = joueurs.Joueur_gagnant(0, resultat_Joueur)
+				if resultat == True:
+					print("Le joueur", joueur, "a gagné.\n 1: relancer 2: Quitter" )
+					relancer = input()
+					if relancer =="1":
+						self.nombreDeTours += 1
+						print(self.nombreDeTours)
+					if relancer == "2":
+						self.finDuJeu(self.nombreDeTours)
+						exit()
 
 		
-		print("Pas de gagnant pour ce tour.\n 1: Relancer 2: Quitter")
-		relancer = input()
-		if relancer == "2":
-			exit()
+			print("Pas de gagnant pour ce tour.\n 1: Relancer 2: Quitter")
+			relancer = input()
+			if relancer == "2":
+				exit()
 
-print("Binvenue sur le jeu du 421 \n Pour jouer tapez 1, Pour quitter tapez 2")
-choix = input()
-print (choix)
-if choix == "1":
-	print("Entrez le nombre de joueurs et definissez vous un numero")
-	nombre_joueurs = input()
-	joueurs = Joueur(nombre_joueurs)
-	joueurs.afficherNombreJoueurs()
 	
-	print("1: lancer les dés 2: Quitter")
-	choix = input()
-	try:
-		jeu(nombre_joueurs)
-
-	except:
-		print("On avait dit un NOMBRE de joueurs")
-		quit()
-	
-	
-
-else:
-	quit()
-
-
+	def finDuJeu(self, nombreDeTours):
+		print(f"Le jeu est terminé, voici les scores")
+Jeu()
 
 
 
