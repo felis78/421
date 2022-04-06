@@ -1,6 +1,6 @@
 from random import randint
 
-class Joueur():
+class Joueur:
 	def __init__(self, nombreJoueurs):
 			self.nombreJoueurs = nombreJoueurs
 
@@ -13,9 +13,7 @@ class Joueur():
 			if resultatJoueur in gagnant:
 				return True
 
-
-
-class Des():
+class Des:
     def __init__(self):
     	pass
 
@@ -31,28 +29,35 @@ class Jeu:
 
 	def __init__(self):	
 		self.nombreDeTours = 0
-		self.test = 0
+		test = False
 		while test == False:
 			try:
-				choix = int(input("Binvenue sur le jeu du 421 \n Pour jouer tapez 1, Pour quitter tapez 2"))
+				choix = int(input("Binvenue sur le jeu du 421 \n Pour jouer tapez 1, Pour quitter tapez 2 "))
 				test = True
 			except ValueError:
 				print("OOOOPS this is not integrer" )
-				test = False
 
 
-		if choix == "1":
-			print("Entrez le nombre de joueurs et definissez vous un numero")
-			nombre_joueurs = input()
+		if choix == 1:
+			test = False
+			while test == False:
+				try:
+					nombre_joueurs = int(input("Entrez le nombre de joueurs et definissez vous un numero "))
+					test = True
+				except ValueError:
+					print("OOOPS this is not integrer")
+			
 			joueurs = Joueur(nombre_joueurs)
 			joueurs.afficherNombreJoueurs()
-	
-			try:
-				choix = int(input("1: lancer les dés 2: Quitter "))
 			
-			except ValueError:
-				print("OOOPS, this is not integrer")
-				quit()
+			test = False
+			while test == False:
+				try:
+					choix = input(int("1: lancer les dés 2: Quitter "))
+					test = True
+				except ValueError:
+					print("OOOPS, this is not integrer")
+					
 					
 			if choix == 1:
 				self.jeu(nombre_joueurs)
@@ -75,9 +80,16 @@ class Jeu:
 				print("Le joueur ", joueur, "a fait ",resultat_Joueur)
 				joueurs = Joueur
 				resultat = joueurs.Joueur_gagnant(0, resultat_Joueur)
+
 				if resultat == True:
-					print("Le joueur", joueur, "a gagné.\n 1: relancer 2: Quitter" )
-					relancer = input()
+					test = False
+					while test == False:
+						try:
+							relancer = input(int("Le joueur", joueur, "a gagné.\n 1: relancer 2: Quitter" ))
+							test = True
+						except ValueError:
+							print("OOOPS this is not integrer")
+
 					if relancer =="1":
 						self.nombreDeTours += 1
 						print(self.nombreDeTours)
@@ -85,15 +97,19 @@ class Jeu:
 						self.finDuJeu(self.nombreDeTours)
 						exit()
 
-		
-			print("Pas de gagnant pour ce tour.\n 1: Relancer 2: Quitter")
-			relancer = input()
+			test = False
+			while test == False:
+				try:
+					relancer = input(int("Pas de gagnant pour ce tour.\n 1: Relancer 2: Quitter"))
+					test = True
+				except ValueError:
+					print ("OOOPS this is not integrer, try again")
 			if relancer == "2":
 				exit()
 
 	
 	def finDuJeu(self, nombreDeTours):
-		print(f"Le jeu est terminé, voici les scores")
+		print(f"Le jeu est terminé, voici les scores {nombreDeTours}")
 Jeu()
 
 
