@@ -3,29 +3,21 @@ from random import randint
 #############################################################################
 
 class Joueur:
-	def __init__(self, nomJoueur):
-		self.nomJoueur = nomJoueur
+    def JoueurGagnant(self, resultatJoueur):
+        gagnant = [[4,2,1], [4,1,2], [2,1,4], [2,4,1], [1,2,4], [1,4,2]]
+        for i in gagnant:
+            if resultatJoueur in gagnant:
+                return True
 
+            else:
+                return False
 
-	def __get__nomDuJoueur(self):
-		return self.nomJoueur 
-
-	nom = property(__get__nomDuJoueur) #renvoie le nom de l'utilisateur lié a la fonction
-
-	def JoueurGagnant(self, resultatJoueur):
-		gagnant = [[4,2,1], [4,1,2], [2,1,4], [2,4,1], [1,2,4], [1,4,2]]
-		for i in gagnant:
-			if resultatJoueur in gagnant:
-				return True
-
-	def JoueursPerdants(self, resultatJoueur, joueursPerdants):
-		print(f"les joueurs ")
+    def JoueursPerdants(self, resultatJoueur, joueursPerdants):
+        print(f"les joueurs ")
 
 #############################################################################
 
 class Des: #renvoie une valeur aléatoire de 1 à 6 inclus ous forme d'un tableau
-    def __init__(self):
-        pass
 
     def LancerDes(self):
         score = []
@@ -43,7 +35,7 @@ class Jeu:
         self.choix = 0
         self.tableau = []
         self.resultat = 0
-
+        self.joueur = 0
         self.initialisation(self.messages(1, 0, 0 ,0))
 
   
@@ -79,9 +71,11 @@ class Jeu:
 
 
     def creerJoueur(self, NombreJoueurs): #recupère le nombre de joueurs et demande d'entrer les noms pour initialiser pour chaque jouer la classe joueur
+        recupMessage = 0
         while self.cpt != NombreJoueurs:
-            joueur=Joueur(self.messages(3, 0, 0, 0))
-            self.tableau.append(joueur)
+            self.joueur = self.messages(3, 0, 0, 0)
+            self.tableau.append(self.joueur)
+            print(self.tableau)
             self.cpt += 1
         self.lancementDes(self.tableau)
 
@@ -93,30 +87,35 @@ class Jeu:
 
 
     def lancementDes(self, joueurs):
-        self.messages
-        des = Des()
-        for i in joueurs:
-            self.resultat = des.LancerDes()
-            nomDuJoueur = Joueur.nom
-        self.resultats(self.resultat, nomDuJoueur)
+            choix = self.messages(4, 0, 0, 0)
+            if choix == 1:
+                des = Des()
+                for i in joueurs:
+                    self.resultat = des.LancerDes()
+                    nomDuJoueur = i
+                self.resultats(self.resultat, nomDuJoueur)
+
+            if choix == 2:
+                self.finDuJeu()
 
 
     def resultats(self,  resultat, nomDuJoueur):
-        print (resultat, nomDuJoueur)
-        gagnant = Joueur.JoueurGagnant(resultat)
+        self.joueur=Joueur()
+        gain = self.joueur.JoueurGagnant(resultat)
+        print(gain)
         self.messages(5, 0, resultat, nomDuJoueur)
         
 
-        if gagnant == True:
+        if gain == True:
             self.messages(6,nomDuJoueur,0, 0)
             self.finDuJeu()
 
-        elif gagnant == False:
-            lancementDes()
+        if gain == False:
+            self.lancementDes(self.tableau)
 
 
     def finDuJeu(self):
-        pass
+        quit()
     		
 
 Jeu()
